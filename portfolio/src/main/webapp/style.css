@@ -1,7 +1,7 @@
 #content {
   width: 650px;
   border: 30px solid purple;
-  padding: 50px;
+  padding: 25px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -14,6 +14,13 @@
   margin-right: 0;
   margin-bottom: 10px;
 }
+
+#content3 {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 h2 {
     color: darkgoldenrod;
@@ -29,7 +36,28 @@ h2 {
   border: thick solid black;
 }
 
-#greeting-container {
+#facts-container {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid rgb(190, 39, 90);
+  float: left;
+  width: 250px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
 }

@@ -1,9 +1,35 @@
 #content {
+  width: 650px;
+  border: 30px solid purple;
+  padding: 50px;
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+}
+
+#content2 {
+  width: 500px;
+  border: 5px solid rgb(190, 39, 90);
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+h2 {
+    color: darkgoldenrod;
+}
+
+.image-thumbnails img {
+  margin: 10px;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.image-thumbnails img:hover {
+  border: thick solid black;
 }
 
 #greeting-container {
   margin-top: 20px;
+  margin-bottom: 20px;
 }

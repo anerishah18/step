@@ -1,9 +1,64 @@
 #content {
+  width: 650px;
+  border: 20px solid purple;
+  padding: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
 }
 
-#greeting-container {
+#content2 {
+  width: 500px;
+  border: 5px solid rgb(190, 39, 90);
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+#content3 {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+h2 {
+    color: darkgoldenrod;
+}
+
+.image-thumbnails img {
+  margin: 10px;
+  max-height: 200px;
+  max-width: 200px;
+  float: right;
+}
+
+.image-thumbnails img:hover {
+  border: thick solid black;
+}
+
+#facts-container {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 5px solid #777;
+  float: left;
+  width: 200px;
+}
+
+div.gallery:hover {
+  border: 5px solid rgb(190, 39, 90); 
+}
+
+div.gallery img {
+  width: 200px;
+  height: 200px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
 }

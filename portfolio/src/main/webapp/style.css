@@ -1,7 +1,7 @@
 #content {
   width: 650px;
-  border: 30px solid purple;
-  padding: 25px;
+  border: 20px solid purple;
+  padding: 20px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -30,6 +30,7 @@ h2 {
   margin: 10px;
   max-height: 200px;
   max-width: 200px;
+  float: right;
 }
 
 .image-thumbnails img:hover {
@@ -43,18 +44,18 @@ h2 {
 
 div.gallery {
   margin: 5px;
-  border: 1px solid rgb(190, 39, 90);
+  border: 5px solid #777;
   float: left;
-  width: 250px;
+  width: 200px;
 }
 
 div.gallery:hover {
-  border: 1px solid #777;
+  border: 5px solid rgb(190, 39, 90); 
 }
 
 div.gallery img {
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
 }
 
 div.desc {

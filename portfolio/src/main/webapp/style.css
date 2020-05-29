@@ -7,7 +7,7 @@
 }
 
 #content2 {
-  width: 500px;
+  width: 550px;
   border: 5px solid rgb(190, 39, 90);
   padding: 0;
   margin-left: 0;
@@ -15,8 +15,20 @@
   margin-bottom: 10px;
 }
 
+#content2:hover {
+    border: 5px solid palevioletred;
+}
+
 #content3 {
   width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content4 {
+  width: 670px;
+  border: 20px solid purple;
+  padding: 50px;
   margin-left: auto;
   margin-right: auto;
 }

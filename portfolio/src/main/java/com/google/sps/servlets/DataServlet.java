@@ -15,6 +15,9 @@
 package com.google.sps.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +27,39 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+    private List<String> sampleStats;
+
+    @Override
+    public void init() {
+        sampleStats = new ArrayList<>();
+        sampleStats.add("Fremont");
+        sampleStats.add("UC Berkeley");
+        sampleStats.add("EECS");
+    }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("Hello Aneri!");
+    //Sample servlet reponse for introduction
+    //response.setContentType("text/html;");
+    //response.getWriter().println("Hello Aneri!");
+
+    //Function returns json string
+    String json = convertToJson(sampleStats);
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+  }
+
+  private String convertToJson(List<String> stats) {
+    String json = "{";
+    json += "\"Hometown\": ";
+    json += "\"" + stats.get(0) + "\"";
+    json += ", ";
+    json += "\"University\": ";
+    json += "\"" + stats.get(1) + "\"";
+    json += ", ";
+    json += "\"Major\": ";
+    json += "\"" + stats.get(2) + "\"";
+    json += "}";
+    return json;
   }
 }

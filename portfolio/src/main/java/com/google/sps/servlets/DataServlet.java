@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    private List<String> sampleStats;
     private List<String> comments;
     private String commentsJson;
 
@@ -35,27 +34,10 @@ public class DataServlet extends HttpServlet {
     public void init() {
         comments = new ArrayList<>();
         commentsJson = "{";
-        /*sampleStats = new ArrayList<>();
-        sampleStats.add("Fremont");
-        sampleStats.add("UC Berkeley");
-        sampleStats.add("EECS");*/
     }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    /*
-    //Sample servlet reponse for introduction
-    response.setContentType("text/html;");
-    response.getWriter().println("Hello Aneri!");
-    */
-
-    /*
-    //Function returns json string (hard-coded)
-    String json = convertToJson(sampleStats);
-    response.setContentType("application/json;");
-    response.getWriter().println(json);
-    */
-
     //Function returns all comments as json string
     String commentsJsonFinal = commentsJson + "}";
     response.setContentType("application/json;");

@@ -28,25 +28,65 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
     private List<String> sampleStats;
+    private List<String> comments;
+    private String commentsJson;
 
     @Override
     public void init() {
-        sampleStats = new ArrayList<>();
+        comments = new ArrayList<>();
+        commentsJson = "{";
+        /*sampleStats = new ArrayList<>();
         sampleStats.add("Fremont");
         sampleStats.add("UC Berkeley");
-        sampleStats.add("EECS");
+        sampleStats.add("EECS");*/
     }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    /*
     //Sample servlet reponse for introduction
-    //response.setContentType("text/html;");
-    //response.getWriter().println("Hello Aneri!");
+    response.setContentType("text/html;");
+    response.getWriter().println("Hello Aneri!");
+    */
 
-    //Function returns json string
+    /*
+    //Function returns json string (hard-coded)
     String json = convertToJson(sampleStats);
     response.setContentType("application/json;");
     response.getWriter().println(json);
+    */
+
+    //Function returns all comments as json string
+    String commentsJsonFinal = commentsJson + "}";
+    response.setContentType("application/json;");
+    response.getWriter().println(commentsJsonFinal);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      String text = getParameter(request, "text-input", "");
+      comments.add(text);
+      appendCommentToJson(text);
+
+      response.setContentType("application/json;");
+      response.getWriter().println(commentsJson + "}");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  private void appendCommentToJson(String comment) {
+      int commentNum = comments.size();
+      if (commentNum > 1) {
+          commentsJson += ", ";
+      }
+      commentsJson += "Comment #" + commentNum + ":";
+      commentsJson += "\"" + comment + "\"";
   }
 
   private String convertToJson(List<String> stats) {

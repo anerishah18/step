@@ -53,7 +53,7 @@ public class DataServlet extends HttpServlet {
     */
 
     //Function loads all comments from DataStore and displays them
-    int maxComments = getMaxComments(request);
+    int maxComments = getMaxComments(request, "maxComments");
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -84,15 +84,18 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      String text = getParameter(request, "text-input", "");
+      String text = getParameter(request, "text-input", null);
+      int maxComments = getMaxComments(request, "maxComments");
       comments.add(text);
       appendCommentToJson(text);
-      addCommentToDataStore(text);
+      if (text != null) {
+        addCommentToDataStore(text);
+      }
 
       //response.setContentType("application/json;");
       //response.getWriter().println(commentsJson + "}");
 
-      response.sendRedirect("/data");
+      response.sendRedirect("/data?maxComments="+maxComments);
   }
 
   //Function retrieves parameter from request.
@@ -130,20 +133,23 @@ public class DataServlet extends HttpServlet {
 
   //Function retrieves number of comments user wishes to see from request
   //Returns -1 for non-integer or negative user inputs
-  private int getMaxComments(HttpServletRequest request) {
-      String maxCommentsString = request.getParameter("maxComments");
+  private int getMaxComments(HttpServletRequest request, String name) {
+      String maxCommentsString = request.getParameter(name);
 
       int maxComments;
 
       try {
         maxComments = Integer.parseInt(maxCommentsString);
       } catch (NumberFormatException e) {
-        //System.err.println("Could not convert to int: " + playerChoiceString);
+        System.err.println("Could not convert to int: " + maxCommentsString);
         return -1;
       }
       if (maxComments < 0) {
+          System.err.println("negative int: " + maxComments);
           return -1;
       }
+
+      System.out.println("maxComments: " + maxComments);
 
       return maxComments;
   }

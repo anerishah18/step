@@ -36,12 +36,7 @@ async function getGreeting(){
 
 function getStats() {
   fetch('/data').then(response => response.json()).then((stats) => {
-    // stats is an object, not a string, so we have to
-    // reference its fields to create HTML content
 
-    /*console.log(stats.Hometown);
-    console.log(stats.University);
-    console.log(stats.Major);*/
     const statsListElement = document.getElementById('stats-container');
     statsListElement.innerHTML = '';
     statsListElement.appendChild(

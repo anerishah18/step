@@ -60,12 +60,15 @@
       <p>Click <a href="blog.html">here</a> to see my very short blog series!</p>
       <marquee bgcolor="#cccccc" loop="-1" scrollamount="5" width="100%">If you can dream it, you can do it. - Walt Disney</marquee>
       </div>
-      
-      <div id="content2">
-        <p>Click here to see quick facts about me!:</p>
-        <button onclick="getStats()">Fetch Aneri's stats!</button>
-        <ul id="stats-container"></ul>
-    </div>
+
+      <form action="/data" method="POST">
+
+        <p>Comment below:</p>
+        <textarea name="text-input">comment here</textarea>
+        <br/><br/>
+
+        <input type="submit" />
+      </form>
     </div>
   </body>
 </html>

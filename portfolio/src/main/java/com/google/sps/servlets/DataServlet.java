@@ -87,6 +87,8 @@ public class DataServlet extends HttpServlet {
       response.sendRedirect("/data");
   }
 
+  //Function retrieves parameter from request.
+  //Provides default value upon null retrieval
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {
@@ -95,6 +97,7 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 
+  //Function adds a comment to running JSON string attribute of class
   private void appendCommentToJson(String comment) {
       int commentNum = comments.size();
       if (commentNum > 1) {
@@ -104,6 +107,7 @@ public class DataServlet extends HttpServlet {
       commentsJson += "\"" + comment + "\"";
   }
 
+  //Function adds comment to DataStore, specifying comment contents and timestamp
   private void addCommentToDataStore(String comment) {
       int commentNum = comments.size();
       long timestamp = System.currentTimeMillis();
@@ -116,6 +120,7 @@ public class DataServlet extends HttpServlet {
       datastore.put(taskEntity);
   }
 
+  //Function used to convert hard-coded ArrayList to JSON string
   private String convertToJson(List<String> stats) {
     String json = "{";
     json += "\"Hometown\": ";

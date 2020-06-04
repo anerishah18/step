@@ -96,7 +96,7 @@ public class DataServlet extends HttpServlet {
       //response.getWriter().println(commentsJson + "}");
 
       //response.sendRedirect("/data?maxComments="+maxComments);
-      response.sendRedirect("/index.html");
+      response.sendRedirect("/comments.html");
   }
 
   //Function retrieves parameter from request.

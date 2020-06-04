@@ -76,6 +76,5 @@ function createListElement(comment) {
 
 async function deleteData() {
     const response = await(fetch('/delete-data', {method: 'post'}));
-    console.log("about to run load");
-    loadComments();
+    window.location.href = "/index.html";
 }

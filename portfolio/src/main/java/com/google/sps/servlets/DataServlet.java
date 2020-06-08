@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,7 +64,7 @@ public class DataServlet extends HttpServlet {
 
     List<Comment> commentsList = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if (addedComments >= maxComments) {
+      if (maxComments > 0 && addedComments >= maxComments) {
           break;
       }
       long id = entity.getKey().getId();
@@ -85,17 +86,17 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String text = getParameter(request, "text-input", null);
-      int maxComments = getMaxComments(request, "maxComments");
       comments.add(text);
       appendCommentToJson(text);
-      if (text != null) {
+      if (text != null && text.length() > 0) {
         addCommentToDataStore(text);
       }
 
       //response.setContentType("application/json;");
       //response.getWriter().println(commentsJson + "}");
 
-      response.sendRedirect("/data?maxComments="+maxComments);
+      //response.sendRedirect("/data?maxComments="+maxComments);
+      response.sendRedirect("/comments.html");
   }
 
   //Function retrieves parameter from request.

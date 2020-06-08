@@ -48,8 +48,33 @@ function getStats() {
   });
 }
 
-function createListElement(text) {
+function loadComments() {
+  fetch('/data?maxComments='+0).then(response => response.json()).then((comments) => {
+    const commentElement = document.getElementById('comments-list');
+    comments.forEach((comment) => {
+      commentElement.appendChild(createCommentElement(comment));
+    })
+  });
+}
+
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = comment.title;
+
+  commentElement.appendChild(titleElement);
+  return commentElement;
+}
+
+function createListElement(comment) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerText = comment.title;
   return liElement;
+}
+
+async function deleteData() {
+    const response = await(fetch('/delete-data', {method: 'post'}));
+    window.location.href = "/index.html";
 }

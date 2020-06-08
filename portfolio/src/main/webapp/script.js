@@ -48,6 +48,7 @@ function getStats() {
   });
 }
 
+//Function to load all comments onto comments/html
 function loadComments() {
   fetch('/data?maxComments='+0).then(response => response.json()).then((comments) => {
     const commentElement = document.getElementById('comments-list');
@@ -57,6 +58,19 @@ function loadComments() {
   });
 }
 
+//Function to clear out the comments and then
+//load no more than MAXCOMMENTS comments onto comments/html
+function loadComments(maxComments) {
+  clearComments();
+  fetch('/data?maxComments='+maxComments).then(response => response.json()).then((comments) => {
+    const commentElement = document.getElementById('comments-list');
+    comments.forEach((comment) => {
+      commentElement.appendChild(createCommentElement(comment));
+    })
+  });
+}
+
+//Function to create a comment element to be added to comment list
 function createCommentElement(comment) {
   const commentElement = document.createElement('li');
   commentElement.className = 'comment';
@@ -68,13 +82,15 @@ function createCommentElement(comment) {
   return commentElement;
 }
 
-function createListElement(comment) {
-  const liElement = document.createElement('li');
-  liElement.innerText = comment.title;
-  return liElement;
-}
-
+//Function to delete all comments from datastore
 async function deleteData() {
     const response = await(fetch('/delete-data', {method: 'post'}));
-    window.location.href = "/index.html";
+    clearComments();
+    loadComments();
+    //window.location.href = "/index.html";
+}
+
+function clearComments() {
+    const commentElement = document.getElementById('comments-list');
+    commentElement.textContent = '';
 }

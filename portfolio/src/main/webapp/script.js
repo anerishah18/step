@@ -49,7 +49,7 @@ function getStats() {
 }
 
 //Function to load all comments onto comments/html
-function loadComments() {
+async function loadComments() {
   fetch('/data?maxComments='+0).then(response => response.json()).then((comments) => {
     const commentElement = document.getElementById('comments-list');
     comments.forEach((comment) => {
@@ -93,4 +93,10 @@ async function deleteData() {
 function clearComments() {
     const commentElement = document.getElementById('comments-list');
     commentElement.textContent = '';
+}
+
+function createMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
 }

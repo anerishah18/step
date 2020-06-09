@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-hZxZK2Q5trCATeE4yc31-oZQvDrhTCM"></script>
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
       <h1>Aneri's Portfolio</h1>
+
       <div id="content2">
       <h2>Intro to Me</h2>
       <p> <div class="image-thumbnails">
@@ -25,8 +27,15 @@
       my favorite things, and everything else that make me me!</p>
       <p>Bonus: Look through my profile to spot my favorite disney quotes!</p>
       <marquee bgcolor="#cccccc" loop="-1" scrollamount="5" width="100%">The things that make me different are the things that make me me! - Piglet</marquee>
-
       </div>
+
+    <div id="content2">
+    <body onload="createMap()">
+      <h2>My Favorite Places</h2>
+      <div id="map"></div>
+    </body>
+    </div>
+
       <div id="content2">
       <p>As a little preview, click below to get a random fun fact about me:</p>
       <button onclick="addRandomFunFact()">Fun Fact!</button>

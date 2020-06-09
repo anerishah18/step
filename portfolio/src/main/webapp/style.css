@@ -38,6 +38,9 @@ h2 {
     color: darkgoldenrod;
 }
 
+h3 {
+    color: palevioletred;
+}
 .image-thumbnails img {
   margin: 10px;
   max-height: 200px;

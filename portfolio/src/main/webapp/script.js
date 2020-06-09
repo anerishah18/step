@@ -99,7 +99,7 @@ function createMap() {
   const map = new google.maps.Map(
       document.getElementById('map'),
       {center: {lat: 37.562, lng: -122.052}, 
-      zoom: 10,
+      zoom: 8,
       styles:[
   {
     "elementType": "geometry",
@@ -265,4 +265,37 @@ function createMap() {
     var marker2 = new google.maps.Marker({position: {lat: 37.769, lng:-122.486}, map: map, title: 'Golden Gate Park'});
     var marker3 = new google.maps.Marker({position: {lat: 36.556, lng:-121.923}, map: map, title: 'Carmel-By-The-Sea'});
     var marker4 = new google.maps.Marker({position: {lat: 37.500, lng:-121.973}, map: map, title: 'Sno-Crave Tea House'});
+    var info1 = new google.maps.InfoWindow({
+        content:'<h3>Simply Thai</h3>' +
+                '<p><b>Simply Thai</b> is my favorite Thai restaurant, not just because I love the food ' + 
+                'but also because of the beautiful, calming ambience.</p>'
+    });
+    marker1.addListener('click', function() {
+        info1.open(map, marker1);
+    });
+    var info2 = new google.maps.InfoWindow({
+        content:'<h3>Golden Gate Park</h3>' +
+                '<p><b>GOlden Gate Park</b> is a sprawling expanse of land with open picnic areas, recreational ' + 
+                'boating lakes, fascinating structures, and captivating rose gardens. It remains one of my favorite' +
+                'places to spend the day.</p>'
+    });
+    marker2.addListener('click', function() {
+        info2.open(map, marker2);
+    });
+    var info3 = new google.maps.InfoWindow({
+        content:'<h3>Carmel-By-The-Sea</h3>' +
+                '<p><b>Carmel-By-The-Sea</b> is a small town filled with homey cafes, bustling art galleries, ' + 
+                'and, of course, beautiful beaches by the sea.</p>'
+    });
+    marker3.addListener('click', function() {
+        info3.open(map, marker3);
+    });
+    var info4 = new google.maps.InfoWindow({
+        content:'<h3>Sno-Crave Tea House</h3>' +
+                '<p><b>Sno-Crave Tea House</b> is a cozy cafe nestled in a busy complex, filled with games to play ' + 
+                'with family and friends as well as elaborate dessert creations and amazingly seasoned curly fries.</p>'
+    });
+    marker4.addListener('click', function() {
+        info4.open(map, marker4);
+    });
 }

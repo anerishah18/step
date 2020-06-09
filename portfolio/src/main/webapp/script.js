@@ -48,8 +48,23 @@ function getStats() {
   });
 }
 
+function loginBasedDisplay() {
+    //const response = await fetch('/login-status');
+    fetch('/login-status').then(response => response.json()).then((stats) => {
+        console.log(stats.LoggedIn);
+        console.log(stats.LoggedIn.localeCompare("true") == 0);
+        if (stats.LoggedIn.localeCompare("true") == 0) {
+        document.getElementById("login-logout").innerText = "You're logged in! Submit a comment below.";
+        document.getElementById("form").style.display = "block";
+        } else {
+        document.getElementById("login-logout").innerHTML = "<p>Login <a href=\"" + stats.LoginURL + "\">here</a>.</p>";
+        document.getElementById("form").style.display = "none";
+        }
+    });
+}
+
 //Function to load all comments onto comments/html
-async function loadComments() {
+function loadComments() {
   fetch('/data?maxComments='+0).then(response => response.json()).then((comments) => {
     const commentElement = document.getElementById('comments-list');
     comments.forEach((comment) => {

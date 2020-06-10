@@ -55,10 +55,10 @@ function loginBasedDisplay() {
         console.log(stats.LoggedIn);
         console.log(stats.LoggedIn.localeCompare("true") == 0);
         if (stats.LoggedIn.localeCompare("true") == 0) {
-        document.getElementById("login-logout").innerHTML = "<p>You're logged in! Submit a comment below, or logout <a href=\"" + stats.LogoutURL + "\">here</a> if you want.</p>";
+        document.getElementById("login-logout").innerHTML = "<p>You're logged in! You can browse my profile, submit comments, or logout <a href=\"" + stats.LogoutURL + "\">here</a> if you want.</p>";
         document.getElementById("form").style.display = "block";
         } else {
-        document.getElementById("login-logout").innerHTML = "<p>Login <a href=\"" + stats.LoginURL + "\">here</a> to submit a comment.</p>";
+        document.getElementById("login-logout").innerHTML = "<p>You're logged out! You can continue to browse my profile or login <a href=\"" + stats.LoginURL + "\">here</a> to submit comments.</p>";
         document.getElementById("form").style.display = "none";
         }
     });

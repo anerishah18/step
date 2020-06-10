@@ -48,8 +48,9 @@ function getStats() {
   });
 }
 
+//Displays comment submission form if user is logged in
+//Displays login link if user is logged out.
 function loginBasedDisplay() {
-    //const response = await fetch('/login-status');
     fetch('/login-status').then(response => response.json()).then((stats) => {
         console.log(stats.LoggedIn);
         console.log(stats.LoggedIn.localeCompare("true") == 0);
@@ -91,7 +92,7 @@ function createCommentElement(comment) {
   commentElement.className = 'comment';
 
   const titleElement = document.createElement('span');
-  titleElement.innerText = comment.title;
+  titleElement.innerText = comment.email + ": " + comment.title;
 
   commentElement.appendChild(titleElement);
   return commentElement;

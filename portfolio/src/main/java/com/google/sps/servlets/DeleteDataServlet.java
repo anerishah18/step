@@ -47,9 +47,6 @@ public class DeleteDataServlet extends HttpServlet {
             datastore.delete(commentKey);
         }
 
-        //response.setContentType("text/plain;charset=UTF-8");
-        //response.getWriter().println();
-
         response.sendRedirect("/index.html");
     }
 

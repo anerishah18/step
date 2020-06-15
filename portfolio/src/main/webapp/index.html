@@ -7,10 +7,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-hZxZK2Q5trCATeE4yc31-oZQvDrhTCM"></script>
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="loginBasedDisplay(); createMap()">
     <div id="content">
       <h1>Aneri's Portfolio</h1>
 
+        <div id="login-logout"></div>
       <div id="content2">
       <h2>Intro to Me</h2>
       <p> <div class="image-thumbnails">
@@ -30,10 +31,10 @@
       </div>
 
     <div id="content2">
-    <body onload="createMap()">
+    
       <h2>My Favorite Places</h2>
       <div id="map"></div>
-    </body>
+    
     </div>
 
       <div id="content2">
@@ -71,7 +72,7 @@
       <marquee bgcolor="#cccccc" loop="-1" scrollamount="5" width="100%">If you can dream it, you can do it. - Walt Disney</marquee>
       </div>
       
-      <div id="content2">
+      <div id="form">
       <form action="/data" method="POST">
 
         <p>Comment below:</p>

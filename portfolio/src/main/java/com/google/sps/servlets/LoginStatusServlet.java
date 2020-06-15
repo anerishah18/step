@@ -32,7 +32,7 @@ public class LoginStatusServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
+      String urlToRedirectToAfterUserLogsOut = "/comments.html";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
       response.getWriter().println("{\"LoggedIn\": \"true\",");

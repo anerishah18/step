@@ -358,9 +358,6 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void onlyOptionalAttendees() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
-    //
     // Events  :       |--A--|     |--B--|      Optional
     // Day     : |-----------------------------|
     // Options : |--1--|     |--2--|     |--3--|
@@ -388,9 +385,6 @@ public final class FindMeetingQueryTest {
 
    @Test
   public void onlyOptionalAttendeesNotEnoughRoom() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
-    //
     // Events  : |-----A-----||-------B--------|      Optional
     // Day     : |-----------------------------|
     // Options : 

@@ -21,14 +21,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.lang.Long;
 import java.util.Set;
+import java.util.HashSet;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     //throw new UnsupportedOperationException("TODO: Implement this method.");
     List<TimeRange> validTimes = new ArrayList<>();
     Long duration = request.getDuration();
-    System.out.println("duration: " + duration);
     Collection<String> attendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
     
     //special cases checking
     //if duration is longer than a day, return empty set of time ranges
@@ -36,7 +37,7 @@ public final class FindMeetingQuery {
         return validTimes;
     }
     //if no attendees, any time in the day is possible
-    if (attendees.isEmpty()) {
+    if (attendees.isEmpty() && optionalAttendees.isEmpty()) {
         validTimes.add(TimeRange.WHOLE_DAY);
         return validTimes;
     }
@@ -44,6 +45,21 @@ public final class FindMeetingQuery {
     if (events.isEmpty()) {
         validTimes.add(TimeRange.WHOLE_DAY);
         return validTimes;
+    }
+
+    //check if options exist for optional and mandatory attendees
+    Collection<String> allAttendees = new HashSet<String>();
+    allAttendees.addAll(attendees);
+    allAttendees.addAll(optionalAttendees);
+    if (!optionalAttendees.isEmpty()) {
+        MeetingRequest newRequest = new MeetingRequest(allAttendees, duration);
+        Collection<TimeRange> allAttendeesOptions = query(events, newRequest);
+        if (!allAttendeesOptions.isEmpty()) {
+            return allAttendeesOptions;
+        }
+        if (attendees.isEmpty()) {
+            return allAttendeesOptions;
+        }
     }
 
     //normal cases
@@ -70,6 +86,7 @@ public final class FindMeetingQuery {
 
     slots.add(TimeRange.fromStartEnd(TIME_0900PM, TimeRange.END_OF_DAY + 1, false));
 
+    boolean anyOverlap = false;
     for (Event event: events) {
         boolean attendeesOverlap = false;
         Set<String> eventAttendees = event.getAttendees();
@@ -78,6 +95,7 @@ public final class FindMeetingQuery {
         for (String attendee: eventAttendees) {
             if (attendees.contains(attendee)) {
                 attendeesOverlap = true;
+                anyOverlap = true;
                 break;
             }
         }
@@ -89,24 +107,29 @@ public final class FindMeetingQuery {
                 }
             }
         }
-        //if none of the attendees overlap, there are no restrictions, so the whole day is available
-        else {
-            validTimes.add(TimeRange.WHOLE_DAY);
-            return validTimes;
-        }
     }
+
+    //if none of the attendees overlap with any of the events, then the whole day is available
+    if (!anyOverlap) {
+        validTimes.add(TimeRange.WHOLE_DAY);
+        return validTimes;
+    }
+
 
     //finds the first available starting slot, and stores the start time in currentStart
     int currentStart = TimeRange.START_OF_DAY;
     int firstAvailable = 0;
     if (available[0] != 0) {
-        while (available[firstAvailable] == 1) {
+        while (firstAvailable < available.length && available[firstAvailable] == 1) {
             currentStart = slots.get(firstAvailable).end();
             firstAvailable += 1;
         }
 
         if (firstAvailable > 0 && firstAvailable < available.length - 1) {
             currentStart = slots.get(firstAvailable).start();
+        }
+        else if (firstAvailable >= available.length) {
+            return validTimes;
         }
         else {
             if (duration <= 30) {
